@@ -21,11 +21,14 @@ import androidx.compose.ui.unit.sp
 import com.buigues.ortola.nasarover.models.Coordinates
 import com.buigues.ortola.nasarover.models.ground.GroundCellState
 import com.buigues.ortola.nasarover.models.ground.GroundGridState
-import com.buigues.ortola.nasarover.ui.composables.robot.StatelessRobot
+import com.buigues.ortola.nasarover.ui.composables.robot.StatefulRobot
+import com.buigues.ortola.nasarover.viewmodels.GroundCellViewModel
 import com.buigues.ortola.nasarover.viewmodels.GroundGridViewModel
+import org.koin.compose.koinInject
+import org.koin.java.KoinJavaComponent.inject
 
 @Composable
-fun StatelessGroundCell(cellState: GroundCellState) {
+fun StatelessGroundCell(coordinates: Coordinates, isRobotInside: Boolean) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier
@@ -33,53 +36,63 @@ fun StatelessGroundCell(cellState: GroundCellState) {
             .border(width = 1.dp, color = Color.LightGray)
             .size(40.dp)
     ) {
-        if (cellState.isRobotInside) {
-            StatelessRobot()
+        if (isRobotInside) {
+            StatefulRobot()
         } else {
             Text(
                 fontSize = 6.sp,
                 color = Color.White,
-                text = "(${cellState.associatedCoordinates.x}, ${cellState.associatedCoordinates.y})"
+                text = "(${coordinates.x}, ${coordinates.y})"
             )
         }
     }
 }
 
 @Composable
-fun StatelessGroundGrid(groundState: GroundGridState) {
-    val gridItems = List(groundState.rows * groundState.columns) { it }
+fun StatefulGroundCell(viewModel: GroundCellViewModel) {
+    val cellState: GroundCellState by remember { viewModel.groundCellState }
+    StatelessGroundCell(cellState.associatedCoordinates, cellState.isRobotInside)
+}
+
+@Composable
+fun StatelessGroundGrid(rows: Int, columns: Int) {
+    val gridItems = List(rows * columns) { it }
     val robotPosition = Coordinates(0, 0)
     LazyVerticalGrid(
-        columns = GridCells.Fixed(groundState.columns),
+        columns = GridCells.Fixed(columns),
         reverseLayout = true
     ) {
         itemsIndexed(gridItems) { index, _ ->
-            val row = index / groundState.rows
-            val col = index % groundState.columns
-            StatelessGroundCell(
-                cellState = GroundCellState(
-                    associatedCoordinates = Coordinates(col, row),
+            val viewmodel = koinInject<GroundCellViewModel>()
+            val row = index / rows
+            val col = index % columns
+            viewmodel.updateState(
+                GroundCellState(
+                    associatedCoordinates = Coordinates(row, col),
                     isRobotInside = robotPosition.x == col && robotPosition.y == row
                 )
             )
+            StatefulGroundCell(viewmodel)
         }
     }
 }
 
 @Composable
-fun StatefullGroundGrid(viewModel: GroundGridViewModel) {
+fun StatefulGroundGrid(viewModel: GroundGridViewModel = koinInject<GroundGridViewModel>()) {
     val gridState: GroundGridState by remember { viewModel.groundGridState }
-    StatelessGroundGrid(gridState)
+    val rows = gridState.rows
+    val columns = gridState.columns
+    StatelessGroundGrid(rows, columns)
 }
 
 @Preview
 @Composable
 private fun PreviewGroundGrid() {
-    StatefullGroundGrid(GroundGridViewModel(8, 8))
+    StatefulGroundGrid()
 }
 
 @Preview
 @Composable
 private fun PreviewGroundCell() {
-    StatelessGroundCell(GroundCellState())
+    StatefulGroundCell(viewModel = GroundCellViewModel())
 }

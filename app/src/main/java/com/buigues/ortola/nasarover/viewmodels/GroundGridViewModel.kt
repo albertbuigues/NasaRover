@@ -5,12 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.buigues.ortola.nasarover.models.ground.GroundGridState
 
-class GroundGridViewModel(rows: Int, columns: Int): ViewModel() {
+class GroundGridViewModel(): ViewModel() {
 
     private var mGroundGridState = mutableStateOf(GroundGridState())
     val groundGridState: State<GroundGridState> = mGroundGridState
 
-    init {
-        this.mGroundGridState.value = GroundGridState(rows = rows, columns = columns)
+    fun updateState(newState: GroundGridState) {
+        mGroundGridState.value = newState
     }
 }
