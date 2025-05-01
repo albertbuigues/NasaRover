@@ -51,7 +51,6 @@ fun StatelessRobot(orientation: Orientation) {
 
         if (animatedRotation.value != destination) {
             val mediaPlayer = MediaPlayer.create(context, R.raw.bip)
-            mediaPlayer.isLooping = true
             mediaPlayer.start()
             animatedRotation.animateTo(
                 targetValue = destination,
@@ -88,10 +87,4 @@ fun StatelessRobot(orientation: Orientation) {
 fun StatefulRobot(viewModel: RobotViewModel = koinInject<RobotViewModel>()) {
     val robotState by remember { viewModel.robotState }
     StatelessRobot(robotState.orientation)
-}
-
-@Preview
-@Composable
-private fun PreviewStatelessRobot() {
-    StatefulRobot()
 }

@@ -34,4 +34,7 @@ class RobotViewModel: ViewModel() {
             Orientation.WEST -> this.mRobotState.value = RobotState(orientation = Orientation.SOUTH)
         }
     }
+
+    //TODO: Logic for moving forward
+    //TODO: Logic to show error if there is a collision
 }
