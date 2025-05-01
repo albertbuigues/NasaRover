@@ -10,8 +10,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.buigues.ortola.nasarover.ui.composables.robot.StatelessRobot
+import com.buigues.ortola.nasarover.ui.composables.ground.StatefullGroundGrid
 import com.buigues.ortola.nasarover.ui.theme.NasaRoverTheme
+import com.buigues.ortola.nasarover.viewmodels.GroundGridViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,7 @@ class MainActivity : ComponentActivity() {
                         .background(color = MaterialTheme.colorScheme.background),
                     contentAlignment = Alignment.Center
                 ) {
-                    StatelessRobot()
+                    StatefullGroundGrid(viewModel = GroundGridViewModel(10, 10))
                 }
             }
         }

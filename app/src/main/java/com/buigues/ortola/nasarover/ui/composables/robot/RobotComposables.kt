@@ -14,7 +14,7 @@ import com.buigues.ortola.nasarover.R
 
 @Composable
 fun StatelessRobot() {
-    Box(Modifier.size(40.dp)) {
+    Box(Modifier.size(24.dp)) {
         Image(
             painter = painterResource(R.drawable.robot), contentDescription = null,
             contentScale = ContentScale.Fit,
