@@ -24,8 +24,8 @@ import com.buigues.ortola.nasarover.models.ground.GroundGridState
 import com.buigues.ortola.nasarover.ui.composables.robot.StatefulRobot
 import com.buigues.ortola.nasarover.viewmodels.GroundCellViewModel
 import com.buigues.ortola.nasarover.viewmodels.GroundGridViewModel
+import com.buigues.ortola.nasarover.viewmodels.RobotViewModel
 import org.koin.compose.koinInject
-import org.koin.java.KoinJavaComponent.inject
 
 @Composable
 fun StatelessGroundCell(coordinates: Coordinates, isRobotInside: Boolean) {
@@ -37,6 +37,7 @@ fun StatelessGroundCell(coordinates: Coordinates, isRobotInside: Boolean) {
             .size(40.dp)
     ) {
         if (isRobotInside) {
+
             StatefulRobot()
         } else {
             Text(
@@ -55,9 +56,8 @@ fun StatefulGroundCell(viewModel: GroundCellViewModel) {
 }
 
 @Composable
-fun StatelessGroundGrid(rows: Int, columns: Int) {
+fun StatelessGroundGrid(rows: Int, columns: Int, robotPosition: Coordinates) {
     val gridItems = List(rows * columns) { it }
-    val robotPosition = Coordinates(0, 0)
     LazyVerticalGrid(
         columns = GridCells.Fixed(columns),
         reverseLayout = true
@@ -78,11 +78,15 @@ fun StatelessGroundGrid(rows: Int, columns: Int) {
 }
 
 @Composable
-fun StatefulGroundGrid(viewModel: GroundGridViewModel = koinInject<GroundGridViewModel>()) {
+fun StatefulGroundGrid(
+    viewModel: GroundGridViewModel = koinInject<GroundGridViewModel>(),
+    robotViewModel: RobotViewModel = koinInject<RobotViewModel>()
+) {
     val gridState: GroundGridState by remember { viewModel.groundGridState }
     val rows = gridState.rows
     val columns = gridState.columns
-    StatelessGroundGrid(rows, columns)
+    val robotState by remember { robotViewModel.robotState }
+    StatelessGroundGrid(rows, columns, robotState.coordinates)
 }
 
 @Preview
