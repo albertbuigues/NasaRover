@@ -11,6 +11,7 @@ There is no limit for the number of rows and columns but I think I will put it b
 First day I hade some troubles loading the image with Coil API because of the transparent background of the png so I opted to put it into the app assets.
 
 Once I finish the task if I have time I will generate the apk and put it inside my Drive.
+
 Here the link to the apk: 
 
 Note: I've never done CD/CI actions (it would be nice to learn to use them but if I have time i will try to use Github Actions).
