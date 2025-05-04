@@ -16,9 +16,10 @@ Here the link to the apk:
 
 Note: I've never done CD/CI actions (it would be nice to learn to use them but if I have time i will try to use Github Actions).
 
-[ STEP 2: Load a local JSON file and position and move the robot ] - WIP
+[ STEP 2: Load a local JSON file and position and move the robot ]
 
-To do this I've thought to create a data separated module for better clearification and to use Corrutines to read the file using suspend functions.
-Once the file is read i will modify the state of the grid and the robot to set it's initial position, the number of rows and columns and the first orientation
-
-Beside of printing the output i've added the coordinate of each cell inside of the cell to see it easy and the orientation it will be seen by the rotation of the image.
+So in order to do this i've created an interface that would serve to read from all possible sources and map to all possible models.
+And a concrete implementation has been done to map to NasaInstructions class and from a local file URI.
+Coroutines have been used to read from files and to execute the movement steps.
+Also I've used Mockk and Coroutines-test to test the method from my concrete implementation.
+To prevent possible errors Excepcion Handling has been implemented.
