@@ -1,6 +1,6 @@
 package com.buigues.ortola.nasarover.models.robot
 
-import com.buigues.ortola.nasarover.models.Coordinates
+import com.buigues.ortola.data.models.Coordinates
 
 enum class Orientation {
     NORTH, EAST, WEST, SOUTH

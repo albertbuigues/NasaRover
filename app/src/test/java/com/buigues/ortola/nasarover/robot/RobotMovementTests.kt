@@ -1,6 +1,6 @@
 package com.buigues.ortola.nasarover.robot
 
-import com.buigues.ortola.nasarover.models.Coordinates
+import com.buigues.ortola.data.models.Coordinates
 import com.buigues.ortola.nasarover.models.robot.Orientation
 import com.buigues.ortola.nasarover.models.robot.RobotState
 import com.buigues.ortola.nasarover.viewmodels.RobotViewModel

@@ -1,8 +1,11 @@
 package com.buigues.ortola.data.models
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class NasaInstructions(
-    val topRightCorner: Pair<Int, Int>,
-    val roverPosition: Pair<Int, Int>,
+    val topRightCorner: Coordinates,
+    val roverPosition: Coordinates,
     val roverDirection: String,
     val movements: String
 )

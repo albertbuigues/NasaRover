@@ -1,6 +1,6 @@
 package com.buigues.ortola.nasarover.models.ground
 
-import com.buigues.ortola.nasarover.models.Coordinates
+import com.buigues.ortola.data.models.Coordinates
 
 data class GroundCellState(
     val associatedCoordinates: Coordinates = Coordinates(0, 0),

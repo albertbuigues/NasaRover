@@ -3,7 +3,7 @@ package com.buigues.ortola.nasarover.viewmodels
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import com.buigues.ortola.nasarover.models.Coordinates
+import com.buigues.ortola.data.models.Coordinates
 import com.buigues.ortola.nasarover.models.robot.Orientation
 import com.buigues.ortola.nasarover.models.robot.RobotState
 

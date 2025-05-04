@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.buigues.ortola.nasarover.models.Coordinates
+import com.buigues.ortola.data.models.Coordinates
 import com.buigues.ortola.nasarover.models.ground.GroundCellState
 import com.buigues.ortola.nasarover.models.ground.GroundGridState
 import com.buigues.ortola.nasarover.ui.composables.robot.StatefulRobot
